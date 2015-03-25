@@ -16,7 +16,7 @@ set -eo pipefail
 # Set environment for ES URL and use if enabled
 if [ ! -z $ES_URL ]; then
   echo "[kibana] Using $ES_URL as value for elasticsearch_url."
-  sed -ie "s/elasticsearch_url: \"http:\/\/localhost:9200\"/elasticsearch_url: \"http:\/\/$ES_URL\"" /opt/kibana/config/kibana.yml
+  sed -ie "s/elasticsearch_url: \"http:\/\/localhost:9200\"/elasticsearch_url: \"http:\/\/$ES_URL\"/g" /opt/kibana/config/kibana.yml
 else
   # Set environment for KV usage
   ES_CLUSTER=${ES_CLUSTER:-"es01"}
