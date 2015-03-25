@@ -7,6 +7,7 @@
 # 2015/02/05 cgwong v1.0.0: Use minimal JDK 8 base image. Re-create.
 # 2015/02/05 cgwong v1.0.1: Kibana 4, use variable for confd.
 # 2015/03/04 cgwong v1.1.0: Kibana 4.0.1, confd 0.7.1
+# 2015/03/28 cgwong v1.1.1: Include supervisord.
 # ################################################################
 
 FROM monsantoco/min-jessie:latest
@@ -25,7 +26,7 @@ ENV CONFD_VERSION 0.7.1
 WORKDIR ${KIBANA_BASE}
 RUN apt-get -yq update && DEBIAN_FRONTEND=noninteractive apt-get -yq install \
   curl \
-#  supervisor \
+  supervisor \
   && apt-get -y clean && apt-get -y autoclean && apt-get -y autoremove \
   && rm -rf /var/lib/apt/lists/* \
   && curl -s https://download.elasticsearch.org/kibana/kibana/kibana-${KIBANA_VERSION}-linux-x64.tar.gz | tar zxf - \
