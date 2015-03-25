@@ -6,12 +6,12 @@ It is usually the front-end visualization component for an **ELK stack**. That i
 
 
 ### How to use this image
-To start a basic container, specify a URL (hostname/IP and port) for a target Elasticsearch node to connect using `-e ES_URL=http://<hostname/ipv4>:<port>` or `--env ES_URL=http://<hostname/ipv4>:<port>`. If following best practices you should be using a proxy node but you can connect via any proxy or data node.
+To start a basic container, specify a URL (hostname/IP and port) for a target Elasticsearch node to connect using `-e ES_URL=<hostname/ipv4>:<port>` or `--env ES_URL=<hostname/ipv4>:<port>`. If following best practices you should be using a proxy node but you can connect via any proxy or data node.
 
 ```sh
 docker run --name %p \
   --publish 5601:5601 \
-  --env ES_URL=http://elasticsearch.example.com:9200
+  --env ES_URL=elasticsearch.example.com:9200
   monsantoco/kibana
 ```
 

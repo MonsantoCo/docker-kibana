@@ -16,7 +16,7 @@ set -eo pipefail
 # Set environment for ES URL and use if enabled
 if [ ! -z $ES_URL ]; then
   echo "[kibana] Using $ES_URL as value for elasticsearch_url."
-  sed -ie "s/elasticsearch_url: \"http://localhost:9200\"/elasticsearch_url: \"$ES_URL\"" /opt/kibana/config/kibana.yml
+  sed -ie "s/elasticsearch_url: \"http:\/\/localhost:9200\"/elasticsearch_url: \"http:\/\/$ES_URL\"" /opt/kibana/config/kibana.yml
 else
   # Set environment for KV usage
   ES_CLUSTER=${ES_CLUSTER:-"es01"}
@@ -31,7 +31,7 @@ else
   fi
   KV_URL=${KV_HOST}:${KV_PORT}
 
-  [ ! -z $ES_CLUSTER ] && sed -ie "s/es01/$ES_CLUSTER" /etc/confd/conf.d/kibana.toml && sed -ie "s/es01/$ES_CLUSTER" /etc/confd/templates/kibana.yml.tmpl
+  [ ! -z $ES_CLUSTER ] && sed -ie "s/es01/$ES_CLUSTER/g" /etc/confd/conf.d/kibana.toml && sed -ie "s/es01/$ES_CLUSTER/g" /etc/confd/templates/kibana.yml.tmpl
 
   echo "[kibana] booting container using $KV_TYPE KV store and $ES_CLUSTER ES cluster name."
 
