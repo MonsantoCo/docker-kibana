@@ -4,10 +4,12 @@ Description=Kibana
 # Requirements
 Requires=docker.service
 Requires=consul.service
+#Requires=fleet.service
 
 # Dependency ordering and binding
 After=docker.service
 After=consul.service
+#After=fleet.service
 
 [Service]
 TimeoutStartSec=10m

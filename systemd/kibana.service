@@ -4,10 +4,12 @@ Description=Kibana
 # Requirements
 Requires=docker.service
 Requires=etcd.service
+#Requires=fleet.service
 
 # Dependency ordering and binding
 After=docker.service
 After=etcd.service
+#After=fleet.service
 
 [Service]
 TimeoutStartSec=10m
