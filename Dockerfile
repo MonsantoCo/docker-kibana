@@ -49,4 +49,5 @@ RUN groupadd -r ${KIBANA_GROUP} \
 EXPOSE 5601
 
 # Define default command.
-CMD ["/usr/local/bin/kibana.sh"]
+ENTRYPOINT ["/usr/local/bin/kibana.sh"]
+CMD [""]

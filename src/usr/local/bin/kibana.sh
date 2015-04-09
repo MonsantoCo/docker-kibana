@@ -22,7 +22,7 @@ validateURL() {
   # Use URL if provided
   if [ ! -z "$ES_URL" ]; then
     echo "[kibana] Using $ES_URL as value for elasticsearch_url."
-    sed -i "s|^elasticsearch_url: .*|elasticsearch_url: \"http:\/\/$ES_URL\"|g" -e ${KIBANA_CFG_FILE}
+    sed -e "s|^elasticsearch_url: .*|elasticsearch_url: \"http:\/\/$ES_URL\"|g" -i ${KIBANA_CFG_FILE}
   fi
 }
 
@@ -43,8 +43,8 @@ configKV() {
     fi
     KV_URL=${KV_HOST}:${KV_PORT}
 
-    sed -i "s|es01|$ES_CLUSTER|g" -e ${KIBANA_CONFD_CFG}
-    sed -i "s|es01|$ES_CLUSTER|g" -e ${KIBANA_CONFD_TMPL}
+    sed -e "s|es01|$ES_CLUSTER|g" -i ${KIBANA_CONFD_CFG}
+    sed -e "s|es01|$ES_CLUSTER|g" -i ${KIBANA_CONFD_TMPL}
 
     echo "[kibana] booting container using $KV_TYPE KV store and $ES_CLUSTER ES cluster name."
 
@@ -63,12 +63,5 @@ configKV() {
 validateURL
 configKV
 
-# if `docker run` first argument start with `--` the user is passing launcher arguments
-if [[ $# -lt 1 ]] || [[ "$1" == "--"* ]]; then
-  echo "[kibana] Starting Kibana service..."
-  /usr/bin/supervisord -c /etc/supervisor/supervisord.conf
-  #exec /opt/kibana/bin/kibana "$@"
-fi
-
-# As argument is not Elasticsearch, assume user want to run his own process, for sample a `bash` shell to explore this image
-exec "$@"
+echo "[kibana] Starting Kibana service..."
+/usr/bin/supervisord -c /etc/supervisor/supervisord.conf
