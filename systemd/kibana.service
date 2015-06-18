@@ -1,0 +1,28 @@
+[Unit]
+Description=Kibana
+
+# Requirements
+Requires=docker.service
+
+# Dependency ordering and binding
+After=docker.service
+
+[Service]
+TimeoutStartSec=10m
+Restart=on-failure
+RestartSec=5s
+
+ExecStartPre=-/usr/bin/docker kill %p
+ExecStartPre=/usr/bin/docker pull monsantoco/kibana:latest
+
+ExecStart=/usr/bin/docker run --name %p \
+  --publish 5601:5601 \
+  --env KIBANA_ELASTICSEARCH_URL=http://elasticsearch.example.local:9200 \
+  monsantoco/kibana:latest
+
+ExecStop=/usr/bin/docker stop %p
+ExecStop=-/usr/bin/docker rm %p
+
+[Install]
+WantedBy=multi-user.target
+
