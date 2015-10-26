@@ -1,7 +1,5 @@
-#!/bin/bash
-# #################################################################
-# DESC: Kibana startup file.
-# #################################################################
+#!/usr/bin/env bash
+# Kibana startup file.
 
 # Fail hard, include pipelines
 #set -eo pipefail
@@ -17,7 +15,7 @@ echo "KIBANA_ELASTICSEARCH_URL=${KIBANA_ELASTICSEARCH_URL}"
 
 # Download the config file if given a URL
 if [ ! -z ${KIBANA_CFG_URL} ]; then
-  curl --location --silent --insecure --output ${KIBANA_CFG_FILE} ${KIBANA_CFG_URL}
+  curl -sSL --output ${KIBANA_CFG_FILE} ${KIBANA_CFG_URL}
   if [ $? -ne 0 ]; then
     echo "[KIBANA] Unable to download file ${KIBANA_CFG_URL}."
     exit 1
@@ -44,7 +42,7 @@ done
 
 # If there are any arguments then we want to run those instead
 if [ -z $1 ]; then
-  /opt/kibana/bin/kibana
+  exec /opt/kibana/bin/kibana
 else
   exec "$@"
 fi

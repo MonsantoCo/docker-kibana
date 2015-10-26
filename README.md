@@ -1,8 +1,8 @@
 ## Docker Kibana
 
-This is a configurable [Kibana](https://www.elastic.co/products/kibana) [Docker](https://www.docker.com/) built using [Docker's automated build process](https://registry.hub.docker.com/u/monsantoco/kibana/) and published to the public [Docker Hub Registry](https://registry.hub.docker.com/).
+This is a configurable [Kibana](https://www.elastic.co/products/kibana) [Docker](https://www.docker.com/) built using [Docker's automated build process](https://registry.hub.docker.com/u/cgswong/kibana/) and published to the public [Docker Hub Registry](https://registry.hub.docker.com/).
 
-It is usually the front-end visualization component for an **ELK stack**. That is, [Elasticsearch](https://www.elastic.co/products/elasticsearch), [Logstash](https://www.elastic.co/products/logstash) and [Kibana](https://www.elastic.co/products/kibana) .
+It is usually the front-end visualization component for an **ELK stack**. That is, [ElasticSearch](https://www.elastic.co/products/elasticsearch), [Logstash](https://www.elastic.co/products/logstash) and [Kibana](https://www.elastic.co/products/kibana) .
 
 
 ### How to use this image
@@ -15,7 +15,7 @@ docker run --name kibana \
   monsantoco/kibana
 ```
 
-> Note that for connecting to an Elasticsearch cluster you should be using a proxy node or load balancer.
+> Note that for connecting to an ElasticSearch cluster you should be using a proxy node or load balancer.
 
 ### Additional Configuration
 Within the image the port `5601` is exposed for host mapping. The volume `/opt/kibana/config` is also exposed such that you can use your own configuration file via a host mounted volume. However, you can also download your own configuration file via the `KIBANA_CFG_URL` environment variable. For example:

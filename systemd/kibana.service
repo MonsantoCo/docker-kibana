@@ -13,12 +13,21 @@ Restart=on-failure
 RestartSec=5s
 
 ExecStartPre=-/usr/bin/docker kill %p
+<<<<<<< HEAD
 ExecStartPre=/usr/bin/docker pull monsantoco/kibana:latest
 
 ExecStart=/usr/bin/docker run --name %p \
   --publish 5601:5601 \
   --env KIBANA_ELASTICSEARCH_URL=http://elasticsearch.example.local:9200 \
   monsantoco/kibana:latest
+=======
+ExecStartPre=/usr/bin/docker pull cgswong/kibana:latest
+
+ExecStart=/usr/bin/docker run --name %p \
+  --publish 5601:5601 \
+  --env KIBANA_ELASTICSEARCH_URL=http://elasticsearch.local:9200 \
+  cgswong/kibana:latest
+>>>>>>> 61e9ed046ce5a4d8dc53fca0cee059d01595ff25
 
 ExecStop=/usr/bin/docker stop %p
 ExecStop=-/usr/bin/docker rm %p
